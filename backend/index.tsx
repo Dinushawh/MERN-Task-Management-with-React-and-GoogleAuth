@@ -3,9 +3,12 @@ var mongoose = require("mongoose");
 var cors = require("cors");
 require("dotenv").config();
 
+var routes = require("./routes/routes");
+
 var app = express();
 var port = process.env.PORT || 5001;
 
+app.use(routes);
 app.use(cors());
 app.use(express.json());
 

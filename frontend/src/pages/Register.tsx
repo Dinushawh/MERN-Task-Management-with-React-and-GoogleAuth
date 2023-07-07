@@ -66,7 +66,7 @@ function Register() {
               <span className="text-sm text-gray-500">
                 Already have an account?
                 <span>
-                  <Link to="/login" className="text-blue-800 text-sm">
+                  <Link to="/login" className="text-sm text-blue-500">
                     {" "}
                     Log in here
                   </Link>
