@@ -4,6 +4,8 @@ import BasicFooter from "../components/BasicFooter";
 import { Link } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
@@ -14,17 +16,68 @@ function Login() {
 
   const [username, setUsername] = useState("");
 
+  const handleFetchData = () => {
+    axios
+      .get("http://localhost:5050/users/")
+      .then((res) => {
+        toast.promise(
+          new Promise((resolve, reject) => {
+            if (res.status === 200) {
+              resolve("Data fetched successfully");
+            } else {
+              reject("Failed to fetch data");
+            }
+          }),
+          {
+            pending: "Fetching data...",
+            success: "Data fetched successfully",
+            error: "Failed to fetch data",
+          },
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+        );
+        console.log(res);
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch data");
+      });
+  };
+
   const handleSubmit = async (error: any) => {
     error.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:5050/users/add", {
-        username,
+    axios
+      .get("http://localhost:5050/users/")
+      .then((res) => {
+        toast.promise(
+          new Promise((resolve, reject) => {
+            if (res.status === 200) {
+              resolve("Data fetched successfully");
+            } else {
+              reject("Failed to fetch data");
+            }
+          }),
+          {
+            pending: "Fetching data...",
+            success: "Data fetched successfully",
+            error: "Failed to fetch data",
+          }
+        );
+        console.log(res);
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch data");
       });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -63,9 +116,12 @@ function Login() {
                 Forget password
               </a>
             </div>
-            <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
-              Login
-            </button>
+            <div>
+              <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
+                Login
+              </button>
+            </div>
+
             <GoogleLoginAuth />
             <div className="flex items-center justify-left mt-4">
               <span className="text-sm text-gray-500">

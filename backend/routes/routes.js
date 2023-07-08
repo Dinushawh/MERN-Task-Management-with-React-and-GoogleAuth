@@ -10,8 +10,12 @@ router.route("/").get((req, res) => {
 
 // ADD DATA TO THE DATABASE
 router.route("/add").post((req, res) => {
-  const username = req.body.username; // username is the name of the field in the form in the frontend
-  const newUser = new User({ username }); // username is the name of the field in the database
+  const email = req.body.email;
+  const password = req.body.password;
+  const role = req.body.role;
+  const fullname = req.body.fullname;
+  // username is the name of the field in the form in the frontend
+  const newUser = new User({ email, password, role, fullname }); // username is the name of the field in the database
 
   newUser
     .save()
