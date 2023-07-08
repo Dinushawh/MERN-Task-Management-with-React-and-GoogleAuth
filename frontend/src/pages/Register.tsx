@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BasicFooter from "../components/BasicFooter";
 import { Link } from "react-router-dom";
-import GoogleLogin2 from "../components/GoogleLogin";
+import GoogleLoginAuth from "../components/GoogleLogin";
 
 function Register() {
   const [isChecked, setIsChecked] = useState(false);
@@ -18,7 +18,7 @@ function Register() {
             Please enter your credentials to create a free account.
           </p>
           <div className="grid grid-cols-1 gap-4 pb-4">
-            <GoogleLogin2 />
+            <GoogleLoginAuth />
           </div>
           <form>
             <p className="text-black text-sm pb-3">

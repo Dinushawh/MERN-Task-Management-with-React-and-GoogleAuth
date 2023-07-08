@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import BasicFooter from "../components/BasicFooter";
 
 import { Link } from "react-router-dom";
-import GoogleLogin2 from "../components/GoogleLogin";
+import GoogleLoginAuth from "../components/GoogleLogin";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
@@ -49,7 +49,7 @@ function Login() {
             <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
               Login
             </button>
-            <GoogleLogin2 />
+            <GoogleLoginAuth />
             <div className="flex items-center justify-left mt-4">
               <span className="text-sm text-gray-500">
                 Don't have an account?

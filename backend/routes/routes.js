@@ -1,8 +1,22 @@
-const { Router } = require("express");
-const { get } = require("mongoose");
-const { getRoutes } = require("../controllers/taskcontrollers");
-const router = Router();
+const router = require("express").Router();
+let User = require("../models/users.model");
 
-router.get("/get", getRoutes);
+//RETEIVE DATA FROM THE DATABASE
+router.route("/").get((req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// ADD DATA TO THE DATABASE
+router.route("/add").post((req, res) => {
+  const username = req.body.username; // username is the name of the field in the form in the frontend
+  const newUser = new User({ username }); // username is the name of the field in the database
+
+  newUser
+    .save()
+    .then(() => res.json("User added!"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 
 module.exports = router;
