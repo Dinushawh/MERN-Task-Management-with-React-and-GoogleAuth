@@ -15,8 +15,9 @@ router.route("/add").post((req, res) => {
   const password = req.body.password;
   const role = req.body.role;
   const fullname = req.body.fullname;
+  const googleauth = req.body.googleauth;
   // username is the name of the field in the form in the frontend
-  const newUser = new User({ email, password, role, fullname }); // username is the name of the field in the database
+  const newUser = new User({ email, password, role, fullname, googleauth }); // username is the name of the field in the database
 
   newUser
     .save()

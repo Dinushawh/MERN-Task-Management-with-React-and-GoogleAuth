@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const role = "user";
+  const googleauth = false;
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
@@ -46,6 +47,7 @@ function Register() {
           email,
           role,
           fullname,
+          googleauth,
         })
         .then((res) => {
           toast.promise(
@@ -57,7 +59,7 @@ function Register() {
               }
             }),
             {
-              pending: "Loading...",
+              pending: "Please wait we are working on your account...",
               success: "User created successfully",
               error: "Failed to create user",
             }
@@ -69,6 +71,10 @@ function Register() {
           toast.error("Failed to create user");
         });
     }
+  };
+
+  const getDatafromGoogle = (data: any) => {
+    console.log(data.profileObj);
   };
 
   return (
@@ -124,13 +130,9 @@ function Register() {
                 </span>
               </span>
             </label>
-            <button
-              className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm"
-              onClick={isUserAvailable}
-            >
+            <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
               Sign up
             </button>
-            <ToastContainer />
             <div className="flex items-center justify-center mt-4">
               <span className="text-sm text-gray-500">
                 Already have an account?
