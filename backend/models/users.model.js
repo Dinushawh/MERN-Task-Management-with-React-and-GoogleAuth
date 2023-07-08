@@ -26,6 +26,10 @@ const userSchema = new Schema(
       require: true,
       minlenghth: 3,
     },
+    googleauth: {
+      type: Boolean,
+      require: true,
+    },
   },
   {
     versionKey: false,

@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
+import Redirect from "react-router-dom";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = (error: any) => {
+    error.preventDefault();
     setIsChecked(!isChecked);
   };
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const isUserAvailable = async (error: any) => {
+  const IsUserAvailable = async (error: any) => {
     error.preventDefault();
     if (username === "" || password === "") {
       toast.warn("Please provide an email address");
@@ -24,82 +27,31 @@ function Login() {
       const res = await axios.get("http://localhost:5050/users/");
       const data = res.data;
       console.log(data);
+
       const user = data.find(
-        (user: any) => user.email === username && user.password === password
+        (user: any) => user.email === username && user.googleauth === true
       );
+      console.log(user);
       if (user) {
-        toast.success("Login Successful");
-        console.log("User already exists");
+        toast.error(
+          "You have logged in using google account plase login using google account"
+        );
+        console.log("user logged with google account");
       } else {
-        toast.error("Invalid Credentials");
-        console.log("Login Failed");
+        console.log("user not logged with google account");
+        const user = data.find(
+          (user: any) => user.email === username && user.password === password
+        );
+        if (user) {
+          toast.success("Login Successful");
+          navigate("/home", { replace: true });
+        } else {
+          toast.error("Invalid Credentials");
+          console.log("Login Failed");
+        }
       }
     }
   };
-
-  // const handleFetchData = () => {
-  //   axios
-  //     .get("http://localhost:5050/users/")
-  //     .then((res) => {
-  //       toast.promise(
-  //         new Promise((resolve, reject) => {
-  //           if (res.status === 200) {
-  //             resolve("Data fetched successfully");
-  //           } else {
-  //             reject("Failed to fetch data");
-  //           }
-  //         }),
-  //         {
-  //           pending: "Fetching data...",
-  //           success: "Data fetched successfully",
-  //           error: "Failed to fetch data",
-  //         },
-  //         <ToastContainer
-  //           position="top-right"
-  //           autoClose={5000}
-  //           hideProgressBar={false}
-  //           newestOnTop={false}
-  //           closeOnClick
-  //           rtl={false}
-  //           pauseOnFocusLoss
-  //           draggable
-  //           pauseOnHover
-  //           theme="light"
-  //         />
-  //       );
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to fetch data");
-  //     });
-  // };
-
-  // const handleSubmit = async (error: any) => {
-  //   error.preventDefault();
-
-  //   axios
-  //     .get("http://localhost:5050/users/")
-  //     .then((res) => {
-  //       toast.promise(
-  //         new Promise((resolve, reject) => {
-  //           if (res.status === 200) {
-  //             resolve("Data fetched successfully");
-  //           } else {
-  //             reject("Failed to fetch data");
-  //           }
-  //         }),
-  //         {
-  //           pending: "Fetching data...",
-  //           success: "Data fetched successfully",
-  //           error: "Failed to fetch data",
-  //         }
-  //       );
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to fetch data");
-  //     });
-  // };
 
   return (
     <>
@@ -109,8 +61,7 @@ function Login() {
           <p className="text-gray-500 text-sm">
             Please sign in to your account.
           </p>
-          <form onSubmit={isUserAvailable}>
-            <ToastContainer />
+          <form onSubmit={IsUserAvailable}>
             <p className="text-black text-sm pb-2">Email</p>
             <input
               className="focus:outline-black border border-gray-300 p-2 w-full rounded shadow-sm placeholder:text-xs"

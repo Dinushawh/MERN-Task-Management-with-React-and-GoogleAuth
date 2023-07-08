@@ -25,7 +25,6 @@ mongoose
   });
 
 var routes = require("./routes/routes");
-
 app.use("/users", routes);
 
 app.listen(port, function () {

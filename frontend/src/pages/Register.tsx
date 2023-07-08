@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
   const role = "user";
+  const googleauth = false;
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [fullname, setFullname] = useState("");
@@ -46,6 +47,7 @@ function Register() {
           email,
           role,
           fullname,
+          googleauth,
         })
         .then((res) => {
           toast.promise(
@@ -71,6 +73,10 @@ function Register() {
     }
   };
 
+  const getDatafromGoogle = (data: any) => {
+    console.log(data.profileObj);
+  };
+
   return (
     <>
       <div className="flex justify-center items-center h-screen ">
@@ -83,7 +89,6 @@ function Register() {
             <GoogleLoginAuth />
           </div>
           <form onSubmit={isUserAvailable}>
-            <ToastContainer />
             <p className="text-black text-sm pb-3">
               Sign up with your credentials
             </p>
@@ -128,7 +133,6 @@ function Register() {
             <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
               Sign up
             </button>
-            <ToastContainer />
             <div className="flex items-center justify-center mt-4">
               <span className="text-sm text-gray-500">
                 Already have an account?
