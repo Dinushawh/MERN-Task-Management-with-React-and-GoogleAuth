@@ -3,12 +3,28 @@ import BasicFooter from "../components/BasicFooter";
 
 import { Link } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
+import axios from "axios";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = async (error: any) => {
+    error.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:5050/users/add", {
+        username,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -19,11 +35,12 @@ function Login() {
           <p className="text-gray-500 text-sm">
             Please sign in to your account.
           </p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <p className="text-black text-sm pb-2">Email</p>
             <input
               className="focus:outline-black border border-gray-300 p-2 w-full rounded shadow-sm placeholder:text-xs"
               type="text"
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your email address"
             />
             <p className="text-black text-sm pb-2 pt-4">Password</p>
