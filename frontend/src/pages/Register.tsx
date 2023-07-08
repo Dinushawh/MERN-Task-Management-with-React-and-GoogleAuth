@@ -57,7 +57,7 @@ function Register() {
               }
             }),
             {
-              pending: "Loading...",
+              pending: "Please wait we are working on your account...",
               success: "User created successfully",
               error: "Failed to create user",
             }
@@ -83,6 +83,7 @@ function Register() {
             <GoogleLoginAuth />
           </div>
           <form onSubmit={isUserAvailable}>
+            <ToastContainer />
             <p className="text-black text-sm pb-3">
               Sign up with your credentials
             </p>
@@ -124,10 +125,7 @@ function Register() {
                 </span>
               </span>
             </label>
-            <button
-              className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm"
-              onClick={isUserAvailable}
-            >
+            <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
               Sign up
             </button>
             <ToastContainer />

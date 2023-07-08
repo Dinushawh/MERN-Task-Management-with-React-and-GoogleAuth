@@ -24,7 +24,6 @@ const userSchema = new Schema(
     fullname: {
       type: String,
       require: true,
-      trim: true,
       minlenghth: 3,
     },
   },
