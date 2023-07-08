@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import BasicFooter from "../components/BasicFooter";
 import { Link } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
@@ -7,9 +6,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
+  const role = "user";
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("user");
   const [fullname, setFullname] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
@@ -17,38 +16,61 @@ function Register() {
     setIsChecked(!isChecked);
   };
 
+  const isUserAvailable = async (err: any) => {
+    err.preventDefault();
+    if (email === "") {
+      toast.warn("Please provide an email address");
+    } else {
+      const res = await axios.get("http://localhost:5050/users/");
+      const data = res.data;
+      console.log(data);
+      const user = data.find((user: any) => user.email === email);
+      if (user) {
+        toast.error("Account already exists with this email address");
+        console.log("User already exists");
+      } else {
+        console.log("User does not exist");
+        handleSubmit(err);
+      }
+    }
+  };
+
   const handleSubmit = async (error: any) => {
     error.preventDefault();
-
-    axios
-      .post("http://localhost:5050/users/add", {
-        password,
-        email,
-        role,
-        fullname,
-      })
-      .then((res) => {
-        toast.promise(
-          new Promise((resolve, reject) => {
-            if (res.status === 200) {
-              resolve("User created successfully");
-            } else {
-              reject("Failed to creeate user");
+    if (password === "" || email === "" || fullname === "") {
+      toast.error("Please fill all the fields");
+    } else {
+      axios
+        .post("http://localhost:5050/users/add", {
+          password,
+          email,
+          role,
+          fullname,
+        })
+        .then((res) => {
+          toast.promise(
+            new Promise((resolve, reject) => {
+              if (res.status === 200) {
+                resolve("User created successfully");
+              } else {
+                reject("Failed to creeate user");
+              }
+            }),
+            {
+              pending: "Loading...",
+              success: "User created successfully",
+              error: "Failed to create user",
             }
-          }),
-          {
-            pending: "Loading...",
-            success: "User created successfully",
-            error: "Failed to create user",
-          }
-        );
-        console.log(res);
-      })
+          );
+          console.log(res);
+        })
 
-      .catch((err) => {
-        toast.error("Failed to create user");
-      });
+        .catch((err) => {
+          toast.error("Failed to create user");
+        });
+    }
   };
+
   return (
     <>
       <div className="flex justify-center items-center h-screen ">
@@ -60,7 +82,7 @@ function Register() {
           <div className="grid grid-cols-1 gap-4 pb-4">
             <GoogleLoginAuth />
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={isUserAvailable}>
             <p className="text-black text-sm pb-3">
               Sign up with your credentials
             </p>
@@ -102,7 +124,10 @@ function Register() {
                 </span>
               </span>
             </label>
-            <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
+            <button
+              className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm"
+              onClick={isUserAvailable}
+            >
               Sign up
             </button>
             <ToastContainer />
@@ -120,7 +145,6 @@ function Register() {
           </form>
         </div>
       </div>
-      <BasicFooter />
     </>
   );
 }
