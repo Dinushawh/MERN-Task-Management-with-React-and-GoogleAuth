@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { login } from "../features/user.reducer";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
@@ -12,9 +14,35 @@ function Login() {
     setIsChecked(!isChecked);
   };
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // const IsUserAvailable = async (error: any) => {
+  //   error.preventDefault();
+  //   if (username === "" || password === "") {
+  //     toast.warn("Please provide an email address");
+  //     console.log("Please provide an email address");
+  //   } else {
+  //     const res = await axios.get("http://localhost:5050/users/");
+  //     const data = res.data;
+  //     console.log(data);
+  //     const user = data.find(
+  //       (user: any) =>
+  //         user.email === username &&
+  //         user.password === password &&
+  //         user.googleauth === false
+  //     );
+  //     if (user) {
+  //       toast.success("Login Successful");
+  //       dispatch(login({ name: "sdf", email: "sdf" }));
+  //       navigate("/home", { replace: true });
+  //     } else {
+  //       toast.error("Something went wrong please try again");
+  //       console.log("Login Failed");
+  //     }
+  //   }
+  // };
 
   const IsUserAvailable = async (error: any) => {
     error.preventDefault();
@@ -33,6 +61,7 @@ function Login() {
       );
       if (user) {
         toast.success("Login Successful");
+        dispatch(login({ name: user.fullname, email: user.email }));
         navigate("/home", { replace: true });
       } else {
         toast.error("Something went wrong please try again");
