@@ -1,6 +1,5 @@
 const router = require("express").Router();
 let User = require("../models/users.model");
-let userEmailcheck = require("../models/checkusers.model");
 
 //RETEIVE DATA FROM THE DATABASE
 router.route("/").get((req, res) => {
