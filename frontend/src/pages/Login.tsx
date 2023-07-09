@@ -1,14 +1,44 @@
 import React, { useState } from "react";
-import BasicFooter from "../components/BasicFooter";
-
-import { Link } from "react-router-dom";
-import GoogleLogin2 from "../components/GoogleLogin";
+import { Link, useNavigate } from "react-router-dom";
+import GoogleLoginAuth from "../components/GoogleLogin";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChange = (error: any) => {
+    error.preventDefault();
     setIsChecked(!isChecked);
+  };
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const IsUserAvailable = async (error: any) => {
+    error.preventDefault();
+    if (username === "" || password === "") {
+      toast.warn("Please provide an email address");
+      console.log("Please provide an email address");
+    } else {
+      const res = await axios.get("http://localhost:5050/users/");
+      const data = res.data;
+      console.log(data);
+      const user = data.find(
+        (user: any) =>
+          user.email === username &&
+          user.password === password &&
+          user.googleauth === false
+      );
+      if (user) {
+        toast.success("Login Successful");
+        navigate("/home", { replace: true });
+      } else {
+        toast.error("Something went wrong please try again");
+        console.log("Login Failed");
+      }
+    }
   };
 
   return (
@@ -19,17 +49,19 @@ function Login() {
           <p className="text-gray-500 text-sm">
             Please sign in to your account.
           </p>
-          <form>
+          <form onSubmit={IsUserAvailable}>
             <p className="text-black text-sm pb-2">Email</p>
             <input
               className="focus:outline-black border border-gray-300 p-2 w-full rounded shadow-sm placeholder:text-xs"
-              type="text"
+              type="email"
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your email address"
             />
             <p className="text-black text-sm pb-2 pt-4">Password</p>
             <input
               className="focus:outline-black border border-gray-300 p-2 w-full rounded shadow-sm placeholder:text-xs"
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
             />
             <div className="flex ">
@@ -46,10 +78,13 @@ function Login() {
                 Forget password
               </a>
             </div>
-            <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
-              Login
-            </button>
-            <GoogleLogin2 />
+            <div>
+              <button className=" bg-black hover:bg-slate-800 text-white w-full p-2 rounded shadow-sm mt-4 text-sm">
+                Login
+              </button>
+            </div>
+
+            <GoogleLoginAuth />
             <div className="flex items-center justify-left mt-4">
               <span className="text-sm text-gray-500">
                 Don't have an account?
@@ -62,7 +97,6 @@ function Login() {
           </form>
         </div>
       </div>
-      <BasicFooter />
     </>
   );
 }
