@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-
-import Redirect from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const [isChecked, setIsChecked] = useState(false);
@@ -27,28 +25,18 @@ function Login() {
       const res = await axios.get("http://localhost:5050/users/");
       const data = res.data;
       console.log(data);
-
       const user = data.find(
-        (user: any) => user.email === username && user.googleauth === true
+        (user: any) =>
+          user.email === username &&
+          user.password === password &&
+          user.googleauth === false
       );
-      console.log(user);
       if (user) {
-        toast.error(
-          "You have logged in using google account plase login using google account"
-        );
-        console.log("user logged with google account");
+        toast.success("Login Successful");
+        navigate("/home", { replace: true });
       } else {
-        console.log("user not logged with google account");
-        const user = data.find(
-          (user: any) => user.email === username && user.password === password
-        );
-        if (user) {
-          toast.success("Login Successful");
-          navigate("/home", { replace: true });
-        } else {
-          toast.error("Invalid Credentials");
-          console.log("Login Failed");
-        }
+        toast.error("Something went wrong please try again");
+        console.log("Login Failed");
       }
     }
   };

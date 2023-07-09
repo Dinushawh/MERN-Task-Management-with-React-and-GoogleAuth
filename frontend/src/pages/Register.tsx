@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GoogleRegister from "../components/GoogleRegister";
 
 function Register() {
   const role = "user";
@@ -73,10 +73,6 @@ function Register() {
     }
   };
 
-  const getDatafromGoogle = (data: any) => {
-    console.log(data.profileObj);
-  };
-
   return (
     <>
       <div className="flex justify-center items-center h-screen ">
@@ -86,7 +82,7 @@ function Register() {
             Please enter your credentials to create a free account.
           </p>
           <div className="grid grid-cols-1 gap-4 pb-4">
-            <GoogleLoginAuth />
+            <GoogleRegister />
           </div>
           <form onSubmit={isUserAvailable}>
             <p className="text-black text-sm pb-3">
