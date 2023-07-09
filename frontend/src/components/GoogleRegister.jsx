@@ -1,34 +1,70 @@
 import React from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function GoogleRegister() {
-  function handleCredentialResponse(response) {
-    var userObject = response.credential;
-    console.log("Encoded JWT id Tocken: " + userObject);
-    var decodeduserObject = jwtDecode(userObject);
-    console.log("Decoded JWT id Tocken: " + JSON.stringify(decodeduserObject));
-    console.log("User ID: " + decodeduserObject.sub);
-  }
-  //global google
-  const google = window.google;
-  window.onload = function () {
-    google.accounts.id.initialize({
-      client_id:
-        "25963119610-ubc8001rfa4nd2huaosukq4r3hfpd9b3.apps.googleusercontent.com",
-      callback: handleCredentialResponse,
-    });
-    google.accounts.id.renderButton(
-      document.getElementById("googleLoginButton"),
-      { theme: "outline", size: "large", text: "Sign up with Google" } // customization attributes
-    );
-    google.accounts.id.prompt(); // also display the One Tap dialog
+  const isUserAvailable = async (ueerCredentials) => {
+    console.log(ueerCredentials);
+    const res = await axios.get("http://localhost:5050/users/");
+    const data = res.data;
+    console.log(data);
+    const user = data.find((user) => user.email === ueerCredentials.email);
+    if (user) {
+      toast.error(
+        "User already exists with this email address please login to continue"
+      );
+    } else {
+      handleSubmit(ueerCredentials);
+    }
   };
+
+  const handleSubmit = async (ueerCredentials) => {
+    const password = "loggedwithgoogleauth";
+    const role = "user";
+    const googleauth = true;
+    axios
+      .post("http://localhost:5050/users/add", {
+        password,
+        email: ueerCredentials.email,
+        role,
+        fullname: ueerCredentials.name,
+        googleauth,
+      })
+      .then((res) => {
+        toast.promise(
+          new Promise((resolve, reject) => {
+            if (res.status === 200) {
+              resolve("User created successfully");
+            } else {
+              reject("Failed to creeate user");
+            }
+          }),
+          {
+            pending: "Please wait we are working on your account...",
+            success: "User created successfully",
+            error: "Failed to create user",
+          }
+        );
+        console.log(res);
+      });
+  };
+
   return (
     <>
-      <div
-        id="googleLoginButton"
-        className="w-full justify-self-center pt-4 pb-4"
-      ></div>
+      <div className="grid grid-cols-1 gap-4 pt-4">
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse.credential);
+            const USER_CREDENTIAL = jwtDecode(credentialResponse.credential);
+            isUserAvailable(USER_CREDENTIAL);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+      </div>
     </>
   );
 }
