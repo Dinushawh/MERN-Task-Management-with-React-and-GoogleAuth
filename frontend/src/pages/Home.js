@@ -1,22 +1,25 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "../features/user.reducer";
+import SideNavigation from "../components/SideNavigation";
+
 function Home() {
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
   return (
-    <div>
-      <div>DAta</div>
-      <li>Name :{user.name}</li>
-      <li>Email : {user.email}</li>
-      <button
-        onClick={() => {
-          dispatch(login({ name: "sdf", email: "sdf" }));
-        }}
-      >
-        check
-      </button>
+    <div className="flex ">
+      <SideNavigation />
+      <div className="">Home</div>
     </div>
+
+    // <div>
+    //   <div>DAta</div>
+    //   <li>Name :{user.name}</li>
+    //   <li>Email : {user.email}</li>
+    //   <button
+    //     onClick={() => {
+    //       dispatch(login({ name: "sdf", email: "sdf" }));
+    //     }}
+    //   >
+    //     check
+    //   </button>
+    // </div>
   );
 }
 

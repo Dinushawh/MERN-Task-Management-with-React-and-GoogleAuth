@@ -5,9 +5,12 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../features/user.reducer";
 
 function GoogleLoginAuth() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const isUserAvailable = async (ueerCredentials) => {
     console.log(ueerCredentials);
@@ -19,6 +22,7 @@ function GoogleLoginAuth() {
     );
     if (user) {
       toast.success("Login Successful");
+      dispatch(login({ name: user.fullname, email: user.email }));
       navigate("/home", { replace: true });
     } else {
       toast.error(
