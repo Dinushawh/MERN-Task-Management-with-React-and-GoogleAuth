@@ -1,11 +1,14 @@
 import React from "react";
 import SideNavigation from "../components/SideNavigation";
+import NewTodo from "./NewTodo";
 
 function Home() {
   return (
     <div className="flex ">
       <SideNavigation />
-      <div className="">Home</div>
+      <div className="">
+        <NewTodo />
+      </div>
     </div>
 
     // <div>
