@@ -21,6 +21,24 @@ function NewTodo() {
       no: "1",
     },
   ];
+  const tasks = [
+    {
+      title: "All Tasks",
+      no: "4",
+    },
+    {
+      title: "In progress",
+      no: "0",
+    },
+    {
+      title: "Todos",
+      no: "2",
+    },
+    {
+      title: "Drafts",
+      no: "1",
+    },
+  ];
   return (
     <div className="flex ">
       <div className="w-64 bg-white h-screen">
@@ -30,6 +48,22 @@ function NewTodo() {
         </div>
         <div className="flex  items-center justify-between pl-4 pr-4 pt-8">
           <p className="text-sm font-semibold text-gray-500">Teams</p>
+          <IoChevronForwardCircleOutline size={20} color="gray-300" />
+        </div>
+        <div className="flex  items-center justify-between pl-4 pr-4 pt-8 ">
+          <ul className="">
+            {menuItems.map((tasks, index) => (
+              <li key={index} className="text-sm text-gray-400 pb-6 flex">
+                <div>{tasks.title}</div>
+                <span>
+                  <p>{"(" + tasks.no + ")"}</p>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="flex  items-center justify-between pl-4 pr-4 pt-6">
+          <p className="text-sm font-semibold text-gray-500">New Tasks</p>
           <IoChevronForwardCircleOutline size={20} color="gray-300" />
         </div>
         <div className="flex  items-center justify-between pl-4 pr-4 pt-8 ">
