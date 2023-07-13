@@ -62,6 +62,8 @@ function Login() {
       if (user) {
         toast.success("Login Successful");
         dispatch(login({ name: user.fullname, email: user.email }));
+        setUsername("");
+        setPassword("");
         navigate("/home", { replace: true });
       } else {
         toast.error("Something went wrong please try again");
