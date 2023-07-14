@@ -1,4 +1,3 @@
-import React from "react";
 import { GrAddCircle } from "react-icons/gr";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
 import Addnewtodo from "./Addnewtodo";
@@ -78,11 +77,6 @@ function NewTodo() {
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-      <div className="">
-        <div className="h-screen w-auto">
-          <Addnewtodo />
         </div>
       </div>
     </div>

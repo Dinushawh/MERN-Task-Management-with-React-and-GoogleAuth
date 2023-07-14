@@ -2,6 +2,7 @@ import React from "react";
 
 function Addnewtodo() {
   const [showModal, setShowModal] = React.useState(false);
+
   return (
     <>
       <div className="pl-6 pt-6">
@@ -25,17 +26,15 @@ function Addnewtodo() {
                       Add your daily task to be updated daily
                     </p>
                   </div>
-
-                  {/* <button
+                  <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
                   >
                     <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
                       ×
                     </span>
-                  </button> */}
+                  </button>
                 </div>
-
                 <div className="relative p-5 flex-auto">
                   <div className="my-4 text-slate-500  leading-relaxed">
                     <p className="text-black text-sm pb-2">Name the task</p>
@@ -44,7 +43,33 @@ function Addnewtodo() {
                       type="text"
                       placeholder="e.g. Buy groceries"
                     />
-                    <p className="text-black text-sm pb-2 mt-4">Daily Goal</p>
+                    <p className="text-black text-sm pb-2 pt-4">Task Details</p>
+                    <input
+                      className="focus:outline-black border border-gray-300 p-1 w-full rounded shadow-sm placeholder:text-xs"
+                      type="text"
+                      placeholder="e.g. Buy carrots and milk"
+                    />
+                    <p className="text-black text-sm pb-2 mt-4 ">Daily Goal</p>
+                    <div className="grid grid-cols-2">
+                      <div className="grid grid-cols-2 items-center">
+                        <input
+                          className="focus:outline-black border border-gray-300 p-1 rounded shadow-sm placeholder:text-xs w-10 justify-center items-center text-center"
+                          type="text"
+                          maxLength={2}
+                          placeholder="00"
+                        />
+                        <p>Hours</p>
+                      </div>
+                      <div className="grid grid-cols-2 items-center">
+                        <input
+                          className="focus:outline-black border border-gray-300 p-1 rounded shadow-sm placeholder:text-xs w-10 justify-center items-center text-center"
+                          type="text"
+                          maxLength={2}
+                          placeholder="00"
+                        />
+                        <p>Minuts</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
