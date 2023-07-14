@@ -25,7 +25,9 @@ mongoose
   });
 
 var routes = require("./routes/routes");
+var taskroutes = require("./routes/tasks.routes");
 app.use("/users", routes);
+app.use("/tasks", taskroutes);
 
 app.listen(port, function () {
   console.log("Server is running on port: " + port);

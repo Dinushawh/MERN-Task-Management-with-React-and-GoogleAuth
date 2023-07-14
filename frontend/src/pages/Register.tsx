@@ -77,7 +77,7 @@ function Register() {
     <>
       <div className="flex justify-center items-center h-screen ">
         <div className="p-6 rounded shadow-lg w-96 bg-white">
-          <h2 className=" text-xl pb-1">Get Started Now 🤗 </h2>
+          <h2 className=" text-xl pb-1">Get Started Now 🤗</h2>
           <p className="text-black text-xs ">
             Please enter your credentials to create a free account.
           </p>
