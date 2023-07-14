@@ -1,6 +1,7 @@
 import React from "react";
 import { GrAddCircle } from "react-icons/gr";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
+import Addnewtodo from "./Addnewtodo";
 
 function NewTodo() {
   const menuItems = [
@@ -40,8 +41,8 @@ function NewTodo() {
     },
   ];
   return (
-    <div className="flex ">
-      <div className="w-64 bg-white h-screen">
+    <div className="flex">
+      <div className="w-64 bg-white h-screen hidden sm:block">
         <div className="flex  items-center justify-between pl-4 pr-4 pt-8">
           <p className="text-lg font-bold">New Project</p>
           <GrAddCircle size={22} />
@@ -79,8 +80,10 @@ function NewTodo() {
           </ul>
         </div>
       </div>
-      <div className="h-screen  bg-slate-100">
-        <div className="grid grid-cols-2"></div>
+      <div className="">
+        <div className="h-screen w-auto">
+          <Addnewtodo />
+        </div>
       </div>
     </div>
   );
