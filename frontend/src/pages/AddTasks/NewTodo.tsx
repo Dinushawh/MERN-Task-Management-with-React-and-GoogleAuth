@@ -1,6 +1,5 @@
 import { GrAddCircle } from "react-icons/gr";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
-import Addnewtodo from "./Addnewtodo";
 
 function NewTodo() {
   const menuItems = [
@@ -13,7 +12,7 @@ function NewTodo() {
       no: "0",
     },
     {
-      title: "yet to be completed",
+      title: "Yet to be completed",
       no: "2",
     },
     {
@@ -52,11 +51,11 @@ function NewTodo() {
         </div>
         <div className="flex  items-center justify-between pl-4 pr-4 pt-8 ">
           <ul className="">
-            {menuItems.map((tasks, index) => (
+            {menuItems.map((menuItems, index) => (
               <li key={index} className="text-sm text-gray-400 pb-6 flex">
-                <div>{tasks.title}</div>
+                <div>{menuItems.title}</div>
                 <span>
-                  <p>{"(" + tasks.no + ")"}</p>
+                  <p>{"(" + menuItems.no + ")"}</p>
                 </span>
               </li>
             ))}
@@ -68,11 +67,11 @@ function NewTodo() {
         </div>
         <div className="flex  items-center justify-between pl-4 pr-4 pt-8 ">
           <ul className="">
-            {menuItems.map((menuItems, index) => (
+            {tasks.map((tasks, index) => (
               <li key={index} className="text-sm text-gray-400 pb-6 flex">
-                <div>{menuItems.title}</div>
+                <div>{tasks.title}</div>
                 <span>
-                  <p>{"(" + menuItems.no + ")"}</p>
+                  <p>{"(" + tasks.no + ")"}</p>
                 </span>
               </li>
             ))}

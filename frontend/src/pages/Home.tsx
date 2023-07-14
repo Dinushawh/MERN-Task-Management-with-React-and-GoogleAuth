@@ -1,10 +1,9 @@
 import React from "react";
 import "tailwindcss/tailwind.css";
 import SideNavigation from "../components/SideNavigation";
-import NewTodo from "./NewTodo";
-
-import TableModel from "./TableModel";
-import Addnewtodo from "./Addnewtodo";
+import NewTodo from "./AddTasks/NewTodo";
+import Addnewtodo from "./AddTasks/Addnewtodo";
+import TableModel from "./AddTasks/TableModel";
 
 function Home() {
   return (
@@ -17,35 +16,11 @@ function Home() {
       </div>
       <div className="flex-grow  h-screen">
         <Addnewtodo />
-        <div className="flex pl-4 pr-4">
+        <div className=" pl-4 pr-4 pt-8">
           <TableModel />
         </div>
       </div>
     </div>
-    // <div className="flex">
-    //   {/* Sidebar */}
-    //   <div className="w-sidebar bg-black">{/* Sidebar content */}</div>
-
-    //   {/* Notification Section */}
-    //   <div className="w-notification bg-blue-200">
-    //     {/* Notification content */}
-    //   </div>
-
-    //   {/* Task Section */}
-    //   <div className="flex-grow bg-green-200">{/* Task content */}</div>
-    // </div>
-
-    // <div className="flex ">
-    //   <SideNavigation />
-    //   <div className="">
-    //     <NewTodo />
-    //   </div>
-    // </div>
-    // <div className="flex">
-    //   <Sidebartest />
-    //   <NotificationSectiontest />
-    //   <Tasktest />
-    // </div>
 
     // <div>
     //   <div>DAta</div>

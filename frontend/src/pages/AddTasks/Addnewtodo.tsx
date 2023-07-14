@@ -36,7 +36,7 @@ function Addnewtodo() {
                   </button>
                 </div>
                 <div className="relative p-5 flex-auto">
-                  <div className="my-4 text-slate-500  leading-relaxed">
+                  {/* <div className="my-4 text-slate-500  leading-relaxed">
                     <p className="text-black text-sm pb-2">Name the task</p>
                     <input
                       className="focus:outline-black border border-gray-300 p-1 w-full rounded shadow-sm placeholder:text-xs"
@@ -70,7 +70,7 @@ function Addnewtodo() {
                         <p>Minuts</p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
