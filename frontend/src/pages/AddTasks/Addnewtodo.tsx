@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import Datepicker from "react-tailwindcss-datepicker";
 
 function Addnewtodo() {
   const [showModal, setShowModal] = React.useState(false);
+  const [value, setValue] = useState({
+    startDate: null,
+    endDate: null,
+  });
+  const handleValueChange = () => {
+    setValue(value);
+  };
 
   return (
     <>
@@ -35,42 +43,28 @@ function Addnewtodo() {
                     </span>
                   </button>
                 </div>
-                <div className="relative p-5 flex-auto">
-                  {/* <div className="my-4 text-slate-500  leading-relaxed">
-                    <p className="text-black text-sm pb-2">Name the task</p>
+                <div className="relative pl-4 pr-4 flex-auto">
+                  <div className="my-4 text-slate-500  leading-relaxed">
+                    <p className="text-black text-sm pb-1">Task</p>
                     <input
-                      className="focus:outline-black border border-gray-300 p-1 w-full rounded shadow-sm placeholder:text-xs"
+                      className="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
                       type="text"
                       placeholder="e.g. Buy groceries"
                     />
-                    <p className="text-black text-sm pb-2 pt-4">Task Details</p>
+                    <p className="text-black text-sm pb-1 pt-3">Description</p>
                     <input
-                      className="focus:outline-black border border-gray-300 p-1 w-full rounded shadow-sm placeholder:text-xs"
+                      className="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
                       type="text"
-                      placeholder="e.g. Buy carrots and milk"
+                      placeholder="e.g. Buy groceries from walmart"
                     />
-                    <p className="text-black text-sm pb-2 mt-4 ">Daily Goal</p>
-                    <div className="grid grid-cols-2">
-                      <div className="grid grid-cols-2 items-center">
-                        <input
-                          className="focus:outline-black border border-gray-300 p-1 rounded shadow-sm placeholder:text-xs w-10 justify-center items-center text-center"
-                          type="text"
-                          maxLength={2}
-                          placeholder="00"
-                        />
-                        <p>Hours</p>
-                      </div>
-                      <div className="grid grid-cols-2 items-center">
-                        <input
-                          className="focus:outline-black border border-gray-300 p-1 rounded shadow-sm placeholder:text-xs w-10 justify-center items-center text-center"
-                          type="text"
-                          maxLength={2}
-                          placeholder="00"
-                        />
-                        <p>Minuts</p>
-                      </div>
-                    </div>
-                  </div> */}
+                    <p className="text-black text-sm pb-1 pt-3">Deadline</p>
+                    <Datepicker
+                      primaryColor={"blue"}
+                      useRange={false}
+                      value={value}
+                      onChange={handleValueChange}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">

@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userReducer from "./features/user.reducer";
+import { ThemeProvider } from "./ThemeContext";
 
 const store = configureStore({
   reducer: {
@@ -23,12 +24,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="25963119610-ubc8001rfa4nd2huaosukq4r3hfpd9b3.apps.googleusercontent.com">
-      <BrowserRouter>
-        <Provider store={store}>
-          <ToastContainer />
-          <PageRoutes />
-        </Provider>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <ToastContainer />
+            <PageRoutes />
+          </Provider>
+        </BrowserRouter>
+      </ThemeProvider>
     </GoogleOAuthProvider>
   </React.StrictMode>
 );
