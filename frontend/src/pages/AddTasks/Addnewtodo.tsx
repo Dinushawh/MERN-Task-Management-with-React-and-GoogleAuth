@@ -58,7 +58,9 @@ function Addnewtodo() {
                       placeholder="e.g. Buy groceries from walmart"
                     />
                     <p className="text-black text-sm pb-1 pt-3">Deadline</p>
+
                     <Datepicker
+                      inputClassName="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
                       primaryColor={"blue"}
                       useRange={false}
                       value={value}
