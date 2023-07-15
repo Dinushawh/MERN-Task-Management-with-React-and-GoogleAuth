@@ -9,7 +9,7 @@ taskroutes.route("/").get((req, res) => {
 
 taskroutes.route("/new-task").post((req, res) => {
   const userid = req.body.userid;
-  const task = req.body.todo;
+  const task = req.body.task;
   const description = req.body.description;
   const deadline = req.body.deadline;
   const status = req.body.status;
