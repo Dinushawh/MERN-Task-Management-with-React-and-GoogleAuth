@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
+import Dropdown from "../../components/Dropdown";
+import Status from "../../components/Status";
 
 function Addnewtodo() {
   const [showModal, setShowModal] = React.useState(false);
@@ -7,7 +9,7 @@ function Addnewtodo() {
     startDate: null,
     endDate: null,
   });
-  const handleValueChange = () => {
+  const handleValueChange = (value: any) => {
     setValue(value);
   };
 
@@ -58,13 +60,46 @@ function Addnewtodo() {
                       placeholder="e.g. Buy groceries from walmart"
                     />
                     <p className="text-black text-sm pb-1 pt-3">Deadline</p>
-
                     <Datepicker
                       inputClassName="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
                       primaryColor={"blue"}
                       useRange={false}
                       value={value}
                       onChange={handleValueChange}
+                    />
+                    <div className="grid grid-cols-2 gap-3 pt-3">
+                      <div className="grid grid-rows-1 ">
+                        <p className="text-black text-sm ">Priority</p>
+                        <Dropdown />
+                      </div>
+                      <div className="grid grid-row-1 w-48">
+                        <p className="text-black text-sm ">Status</p>
+                        <Status />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 pt-3">
+                      <div className="grid grid-rows-1 ">
+                        <p className="text-black text-sm pb-1">Category</p>
+                        <input
+                          className="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
+                          type="text"
+                          placeholder="e.g. Buy groceries"
+                        />
+                      </div>
+                      <div className="grid grid-row-1 w-48">
+                        <p className="text-black text-sm pb-1">Subtask</p>
+                        <input
+                          className="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
+                          type="text"
+                          placeholder="e.g. Buy groceries"
+                        />
+                      </div>
+                    </div>
+                    <p className="text-black text-sm pb-1 pt-3">Comment</p>
+                    <input
+                      className="focus:outline-black  p-2 w-full rounded shadow-sm placeholder:text-xs bg-slate-100 placeholder:p-2 text-sm"
+                      type="text"
+                      placeholder="e.g. Buy groceries"
                     />
                   </div>
                 </div>
