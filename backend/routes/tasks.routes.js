@@ -11,7 +11,8 @@ taskroutes.route("/new-task").post((req, res) => {
   const userid = req.body.userid;
   const task = req.body.task;
   const description = req.body.description;
-  const deadline = req.body.deadline;
+  const startdate = req.body.startdate;
+  const enddate = req.body.enddate;
   const status = req.body.status;
   const priority = req.body.priority;
   const category = req.body.category;
@@ -22,7 +23,8 @@ taskroutes.route("/new-task").post((req, res) => {
     userid,
     task,
     description,
-    deadline,
+    startdate,
+    enddate,
     status,
     priority,
     category,

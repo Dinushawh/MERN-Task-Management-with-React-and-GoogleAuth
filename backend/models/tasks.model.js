@@ -21,11 +21,14 @@ const taskSchema = new Schema(
       trim: true,
       minlenghth: 3,
     },
-    deadline: {
-      type: String,
+
+    startdate: {
+      type: Date,
       require: true,
-      trim: true,
-      minlenghth: 3,
+    },
+    enddate: {
+      type: Date,
+      require: true,
     },
     status: {
       type: String,

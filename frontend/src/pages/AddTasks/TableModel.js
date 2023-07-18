@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RiPencilLine } from "react-icons/ri";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
-
+import moment from "moment";
 import { AiFillDelete } from "react-icons/ai";
 
 function TableModel() {
@@ -58,13 +58,19 @@ function TableModel() {
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                   >
-                    description
+                    category
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                   >
-                    Due
+                    start date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    end date
                   </th>
                   <th
                     scope="col"
@@ -94,7 +100,7 @@ function TableModel() {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {data.map((item) => (
-                  <tr>
+                  <tr key={item._id}>
                     <td className="py-3 pl-4">
                       <div className="flex items-center h-5">
                         <input
@@ -115,10 +121,13 @@ function TableModel() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      {item.description}
+                      {item.category}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                      {item.deadline}
+                      {moment(item.startdate).utc().format("YYYY-MM-DD")}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                      {moment(item.enddate).utc().format("YYYY-MM-DD")}
                     </td>
 
                     <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">

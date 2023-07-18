@@ -16,11 +16,13 @@ function GoogleLoginAuth() {
     console.log(ueerCredentials);
     const res = await axios.get("http://localhost:5050/users/");
     const data = res.data;
-    console.log(data);
+    // console.log(data);
     const user = data.find(
       (user) => user.email === ueerCredentials.email && user.googleauth === true
     );
     if (user) {
+      console.log(user._id);
+      localStorage.setItem("userid", user._id);
       toast.success("Login Successful");
       dispatch(login({ name: user.fullname, email: user.email }));
       navigate("/home", { replace: true });

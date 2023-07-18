@@ -2,12 +2,19 @@ import { Listbox, Transition } from "@headlessui/react";
 import React, { useState, Fragment } from "react";
 import { AiFillAccountBook } from "react-icons/ai";
 
-function Status() {
-  const statustype = [
-    { id: 1, name: "Active", unavailable: false },
-    { id: 2, name: "Disconnected", unavailable: false },
-  ];
+type CallbackFunction = (data: string) => void;
+
+interface ChildComponentProps {
+  callback: CallbackFunction;
+}
+
+const Status: React.FC<ChildComponentProps> = ({ callback }) => {
+  const statustype = [{ name: "Active" }, { name: "Disconnected" }];
   const [selected, setSelected] = useState(statustype[0]);
+
+  const handleClick = () => {
+    callback(selected.name); // Invoke the callback function and pass the data
+  };
   return (
     <div className=" ">
       <Listbox value={selected} onChange={setSelected}>
@@ -37,6 +44,7 @@ function Status() {
                     }`
                   }
                   value={person}
+                  onClick={handleClick}
                 >
                   {({ selected }) => (
                     <>
@@ -65,6 +73,6 @@ function Status() {
       </Listbox>
     </div>
   );
-}
+};
 
 export default Status;
