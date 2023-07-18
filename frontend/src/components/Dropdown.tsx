@@ -3,13 +3,24 @@ import React, { useState, Fragment } from "react";
 import { AiFillAccountBook } from "react-icons/ai";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 
-function Dropdown() {
+type CallbackFunction = (data: string) => void;
+
+interface ChildComponentProps {
+  callback: CallbackFunction;
+}
+
+const Dropdown: React.FC<ChildComponentProps> = ({ callback }) => {
   const people = [
-    { id: 1, name: "High", unavailable: false, icon: BiSolidDownArrow },
-    { id: 2, name: "Low", unavailable: false, icon: BiSolidUpArrow },
+    { name: "High", unavailable: false, icon: BiSolidDownArrow },
+    { name: "Low", unavailable: false, icon: BiSolidUpArrow },
   ];
 
   const [selected, setSelected] = useState(people[0]);
+
+  const handleClick = () => {
+    callback(selected.name); // Invoke the callback function and pass the data
+  };
+
   return (
     <div className=" ">
       <Listbox value={selected} onChange={setSelected}>
@@ -39,6 +50,7 @@ function Dropdown() {
                     }`
                   }
                   value={person}
+                  onClick={handleClick}
                 >
                   {({ selected }) => (
                     <>
@@ -67,6 +79,6 @@ function Dropdown() {
       </Listbox>
     </div>
   );
-}
+};
 
 export default Dropdown;

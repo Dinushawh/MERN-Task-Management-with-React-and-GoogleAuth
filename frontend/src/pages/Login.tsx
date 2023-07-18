@@ -52,7 +52,7 @@ function Login() {
     } else {
       const res = await axios.get("http://localhost:5050/users/");
       const data = res.data;
-      console.log(data);
+      // console.log(data);
       const user = data.find(
         (user: any) =>
           user.email === username &&
@@ -62,6 +62,7 @@ function Login() {
       if (user) {
         toast.success("Login Successful");
         dispatch(login({ name: user.fullname, email: user.email }));
+        console.log(user._id);
         setUsername("");
         setPassword("");
         navigate("/home", { replace: true });
