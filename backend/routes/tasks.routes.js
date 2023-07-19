@@ -38,4 +38,11 @@ taskroutes.route("/new-task").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+//delete task
+taskroutes.route("/delete/:id").delete((req, res) => {
+  Tasks.findByIdAndDelete(req.params.id)
+    .then(() => res.json("task-deleted"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = taskroutes;

@@ -47,10 +47,6 @@ function Addnewtodo() {
     console.log("Received data in parent component:", data);
   };
 
-  const check = () => {
-    console.log(deadline.startDate, deadline.endDate);
-  };
-
   const handleSubmit = async () => {
     if (
       localStorage.getItem("uderid") === "" ||
