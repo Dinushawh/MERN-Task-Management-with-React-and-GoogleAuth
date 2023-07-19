@@ -24,6 +24,11 @@ function SideNavigation() {
       icon: <AiOutlineUser size="22" color="white" />,
     },
   ];
+
+  const signout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
   return (
     <>
       <div
@@ -68,9 +73,11 @@ function SideNavigation() {
               ))}
             </ul>
           </div>
-          <div className="flex justify-center">
-            <CiLogout color="white" size={22} />
-          </div>
+          <button onClick={signout}>
+            <div className="flex justify-center">
+              <CiLogout color="white" size={22} />
+            </div>
+          </button>
         </div>
       </div>
     </>

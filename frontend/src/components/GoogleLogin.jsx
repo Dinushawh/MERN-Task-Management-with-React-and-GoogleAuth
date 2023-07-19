@@ -22,7 +22,7 @@ function GoogleLoginAuth() {
     );
     if (user) {
       console.log(user._id);
-      localStorage.setItem("userid", user._id);
+      localStorage.setItem("userSession", user);
       toast.success("Login Successful");
       dispatch(login({ name: user.fullname, email: user.email }));
       navigate("/home", { replace: true });

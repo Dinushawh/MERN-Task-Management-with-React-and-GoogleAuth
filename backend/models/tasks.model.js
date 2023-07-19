@@ -21,7 +21,6 @@ const taskSchema = new Schema(
       trim: true,
       minlenghth: 3,
     },
-
     startdate: {
       type: Date,
       require: true,
