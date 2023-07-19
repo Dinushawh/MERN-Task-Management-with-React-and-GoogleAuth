@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import Dropdown from "../../components/Dropdown";
 import Status from "../../components/Status";
@@ -7,7 +7,17 @@ import axios from "axios";
 
 function Addnewtodo() {
   const [showModal, setShowModal] = React.useState(false);
-  const [userid] = useState(localStorage.getItem("userid"));
+
+  const [userid, setUserid] = useState("");
+  useEffect(() => {
+    const userSession = localStorage.getItem("userSession");
+    if (userSession) {
+      const parsedUserSession = JSON.parse(userSession);
+      const userIdFromSession = parsedUserSession._id;
+      setUserid(userIdFromSession);
+    }
+  }, []);
+
   const [task, setnewTask] = useState("");
   const [description, setDescription] = useState("");
 
@@ -37,6 +47,10 @@ function Addnewtodo() {
     console.log("Received data in parent component:", data);
   };
 
+  const check = () => {
+    console.log(deadline.startDate, deadline.endDate);
+  };
+
   const handleSubmit = async () => {
     if (
       localStorage.getItem("uderid") === "" ||
@@ -51,8 +65,6 @@ function Addnewtodo() {
       comments === ""
     ) {
       toast.error("Please fill all the fields");
-      console.log("please fill");
-      console.log(deadline);
     } else {
       setStartDate(deadline.startDate);
       setEndDate(deadline.endDate);

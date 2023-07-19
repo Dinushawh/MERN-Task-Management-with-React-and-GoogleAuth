@@ -21,8 +21,7 @@ function GoogleLoginAuth() {
       (user) => user.email === ueerCredentials.email && user.googleauth === true
     );
     if (user) {
-      console.log(user._id);
-      localStorage.setItem("userSession", user);
+      localStorage.setItem("userSession", JSON.stringify(user));
       toast.success("Login Successful");
       dispatch(login({ name: user.fullname, email: user.email }));
       navigate("/home", { replace: true });
