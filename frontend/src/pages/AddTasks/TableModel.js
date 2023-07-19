@@ -158,11 +158,6 @@ function TableModel() {
                         <AiFillDelete size={20} />
                       </button>
                     </td>
-                    {/* <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                      <a className="text-red-500 hover:text-red-700" href="#">
-                        Delete
-                      </a>
-                    </td> */}
                   </tr>
                 ))}
               </tbody>

@@ -8,6 +8,7 @@ import AccessDenied from "../components/AccessDenied";
 
 function Home() {
   const [session] = React.useState(localStorage.getItem("userSession"));
+
   return (
     <>
       {session ? (
@@ -18,6 +19,7 @@ function Home() {
           <div className="w-56 bg-blue-200 h-screen hidden md:block">
             <NewTodo />
           </div>
+
           <div className="flex-grow  h-screen">
             <Addnewtodo />
             <div className=" pl-4 pr-4 pt-8">
