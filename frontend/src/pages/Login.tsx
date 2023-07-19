@@ -8,7 +8,6 @@ import { login } from "../features/user.reducer";
 import BasicModel from "../components/BasicModel";
 
 function Login() {
-  const [showModal, setShowModal] = React.useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (error: any) => {
@@ -49,7 +48,7 @@ function Login() {
     }
   };
 
-  const [sessions, setSessions] = useState(localStorage.getItem("userSession"));
+  const [sessions] = useState(localStorage.getItem("userSession"));
 
   return (
     <>
