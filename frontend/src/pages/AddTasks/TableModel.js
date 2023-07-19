@@ -28,6 +28,17 @@ function TableModel() {
       return null;
     }
   };
+
+  const deleteTask = (id) => {
+    axios
+      .delete(`http://localhost:5050/tasks/delete/${id}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div className="flex flex-col">
       <div className="overflow-x-auto">
@@ -153,7 +164,7 @@ function TableModel() {
                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                       <button
                         className=" p-2 text-red-400 hover:rounded-md hover:bg-slate-100  hover:duration-300"
-                        // onClick={() => handleEdit(item._id)}
+                        onClick={() => deleteTask(item._id)}
                       >
                         <AiFillDelete size={20} />
                       </button>
