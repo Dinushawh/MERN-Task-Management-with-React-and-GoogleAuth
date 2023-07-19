@@ -4,7 +4,7 @@ import SideNavigation from "../components/SideNavigation";
 import NewTodo from "./AddTasks/NewTodo";
 import Addnewtodo from "./AddTasks/Addnewtodo";
 import TableModel from "./AddTasks/TableModel";
-import Login from "./Login";
+import AccessDenied from "../components/AccessDenied";
 
 function Home() {
   const [session] = React.useState(localStorage.getItem("userSession"));
@@ -26,7 +26,7 @@ function Home() {
           </div>
         </div>
       ) : (
-        <div> Access denied</div>
+        <AccessDenied />
       )}
     </>
   );

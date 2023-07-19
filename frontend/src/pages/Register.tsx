@@ -74,7 +74,7 @@ function Register() {
     }
   };
 
-  const [sessions, setSessions] = useState(localStorage.getItem("userSession"));
+  const [sessions] = useState(localStorage.getItem("userSession"));
 
   return (
     <>

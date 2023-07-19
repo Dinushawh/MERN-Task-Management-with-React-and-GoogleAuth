@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function BasicModel() {
+function AccessDenied() {
   let [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
   function closeModal() {
@@ -10,9 +10,8 @@ export default function BasicModel() {
   }
 
   function navigateToHome() {
-    navigate("/home", { replace: true });
+    navigate("/login", { replace: true });
   }
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -45,12 +44,12 @@ export default function BasicModel() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Already session is active
+                    Access Denied
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      You have already logged in to your account. Please logout
-                      before logging in to another account.
+                      You don't have access to this page. Please login to access
+                      this page.
                     </p>
                   </div>
 
@@ -61,16 +60,8 @@ export default function BasicModel() {
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={navigateToHome}
                       >
-                        Go to Home
+                        Log in
                       </button>
-                    </div>
-                    <div className="mt-4 ml-4">
-                      <Link
-                        to="/logout"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                      >
-                        Logout
-                      </Link>
                     </div>
                   </div>
                 </Dialog.Panel>
@@ -82,3 +73,5 @@ export default function BasicModel() {
     </>
   );
 }
+
+export default AccessDenied;
