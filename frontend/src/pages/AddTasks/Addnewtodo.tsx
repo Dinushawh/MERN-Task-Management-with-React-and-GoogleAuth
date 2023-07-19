@@ -80,8 +80,8 @@ function Addnewtodo() {
             }),
             {
               pending: "Please wait we are working on your account...",
-              success: "User created successfully",
-              error: "Failed to create user",
+              success: "Task Added successfully",
+              error: "Failed to add the task please try again",
             }
           );
           console.log(res);
