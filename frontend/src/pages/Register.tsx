@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -7,6 +7,9 @@ import GoogleRegister from "../components/GoogleRegister";
 import BasicModel from "../components/BasicModel";
 
 function Register() {
+  useEffect(() => {
+    document.title = "TMS | Register";
+  }, []);
   const role = "user";
   const googleauth = false;
   const [password, setPassword] = useState("");

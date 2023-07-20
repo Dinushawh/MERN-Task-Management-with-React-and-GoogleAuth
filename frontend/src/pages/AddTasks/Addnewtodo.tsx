@@ -4,6 +4,7 @@ import Dropdown from "../../components/Dropdown";
 import Status from "../../components/Status";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { duration } from "moment";
 
 function Addnewtodo() {
   const [showModal, setShowModal] = React.useState(false);
@@ -82,6 +83,7 @@ function Addnewtodo() {
             new Promise((resolve, reject) => {
               if (res.status === 200) {
                 resolve("Task Added successfully");
+                setShowModal(false);
               } else {
                 reject("Failed to add the task");
               }
