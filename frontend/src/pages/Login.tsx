@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLoginAuth from "../components/GoogleLogin";
 import axios from "axios";
@@ -8,6 +8,9 @@ import { login } from "../features/user.reducer";
 import BasicModel from "../components/BasicModel";
 
 function Login() {
+  useEffect(() => {
+    document.title = "Task Management | Login";
+  }, []);
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (error: any) => {

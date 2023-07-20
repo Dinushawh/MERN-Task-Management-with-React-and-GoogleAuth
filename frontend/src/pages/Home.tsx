@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import SideNavigation from "../components/SideNavigation";
 import NewTodo from "./AddTasks/NewTodo";
@@ -7,6 +7,9 @@ import TableModel from "./AddTasks/TableModel";
 import AccessDenied from "../components/AccessDenied";
 
 function Home() {
+  useEffect(() => {
+    document.title = "TMS | Home";
+  }, []);
   const [session] = React.useState(localStorage.getItem("userSession"));
 
   return (
